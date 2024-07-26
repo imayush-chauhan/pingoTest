@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pingolearntest/screens/login.dart';
 import 'package:pingolearntest/util/myColor.dart';
 import 'package:pingolearntest/util/util.dart';
 
@@ -27,6 +29,19 @@ class _HomeState extends State<Home> {
               fontSize: 14,
               fontWeight: FontWeight.w700
           ),),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: InkWell(
+              onTap: () async {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                  return const Login();
+                }));
+              },
+                child: const Icon(Icons.logout,color: Colors.white,)),
+          ),
+        ],
       ),
       body: FutureBuilder<List>(
         future: get(),
@@ -68,7 +83,7 @@ class _HomeState extends State<Home> {
                               color: MyColor.black,
                             ),),
                         ),
-                        SizedBox(width: 12.5,),
+                        const SizedBox(width: 12.5,),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -104,7 +119,7 @@ class _HomeState extends State<Home> {
                                     ),),
                                   SizedBox(
                                     width: MediaQuery.of(context).size.width - 150,
-                                    child: Text(snap.data![index]["email"],
+                                    child: Text(mask(snap.data![index]["email"]),
                                       maxLines: 1,
                                       style: GoogleFonts.poppins(
                                         fontSize: 14,
@@ -141,6 +156,15 @@ class _HomeState extends State<Home> {
         },
       ),
     );
+  }
+
+  mask(String str){
+    int n = str.indexOf("@");
+    String s = "";
+    for(int i = 0; i < n-3; i++){
+      s = s + "*";
+    }
+    return str.substring(0,3) + s + str.substring(n,str.length);
   }
 
 }
