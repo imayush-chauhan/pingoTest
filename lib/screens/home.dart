@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pingolearntest/util/myColor.dart';
 import 'package:pingolearntest/util/util.dart';
-
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,12 +11,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,9 +140,7 @@ class _HomeState extends State<Home> {
           );
         },
       ),
-
     );
   }
-
 
 }
